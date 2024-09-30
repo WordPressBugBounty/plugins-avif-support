@@ -5,7 +5,6 @@ defined( 'ABSPATH' ) || exit;
 
 use GPLSCore\GPLS_PLUGIN_AVFSTW\Base;
 use GPLSCore\GPLS_PLUGIN_AVFSTW\AvifSupport;
-use GPLSCore\GPLS_PLUGIN_AVFSTW\SVGSupport;
 use function GPLSCore\GPLS_PLUGIN_AVFSTW\Pages\PagesBase\setup_pages;
 use function GPLSCore\GPLS_PLUGIN_AVFSTW\AJAXs\Base\setup_ajaxs;
 
@@ -22,7 +21,6 @@ class Plugin extends Base {
 	 */
 	public static function load() {
 		AvifSupport::init();
-		SVGSupport::init();
 		setup_pages();
 		setup_ajaxs();
 	}

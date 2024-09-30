@@ -2,13 +2,13 @@
 namespace GPLSCore\GPLS_PLUGIN_AVFSTW;
 
 /**
- * Plugin Name:       AVIF & SVG Support [GrandPlugins]
- * Description:       AVIF & SVG support plugin aims to support avif and svg images in WordPress by overcome wp issues and limits regarding uploading, displaying and generating avif images.
+ * Plugin Name:       AVIF Support [GrandPlugins]
+ * Description:       AVIF support plugin aims to support avif images in WordPress by overcome wp issues and limits regarding uploading, displaying and generating avif images.
  * Author:            GrandPlugins
  * Author URI:        https://grandplugins.com
  * Text Domain:       avif-support
  * Std Name:          gpls-avfstw-avif-support
- * Version:           1.1.0
+ * Version:           1.1.1
  * Requires at least: 5.3.0
  * Requires PHP:      7.0.0
  */

@@ -1,10 +1,10 @@
-=== AVIF & SVG Uploader ===
-Tags: avif, image, svg, wordpress avif, image optimization, avif subsizes
+=== AVIF Uploader ===
+Tags: avif, image, wordpress avif, image optimization, avif subsizes
 Tested up to: 6.6
 Requires at least: 5.3.0
 Requires PHP: 7.0.0
-Stable Tag: 1.1.0
-Version: 1.1.0
+Stable Tag: 1.1.1
+Version: 1.1.1
 Contributors: grandplugins
 Author: GrandPlugins
 Author URI: https://grandplugins.com
@@ -14,7 +14,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 
 == Description ==
-AVIF & SVG support plugin aims to support avif and svg images in WordPress by overcome wp issues and limits regarding uploading, displaying and generating avif and SVG images.
+AVIF support plugin aims to support avif images in WordPress by overcome wp issues and limits regarding uploading, displaying and generating avif and SVG images.
 
 == Features ==
 
@@ -23,8 +23,6 @@ AVIF & SVG support plugin aims to support avif and svg images in WordPress by ov
 * Fix WP width and height failure.
 * Fix AVIF sub-sizes generation.
 * Fix AVIF downscale image generation.
-* [New] Allow uploading SVG images.
-* [New] Generate subsizes for SVG images.
 
 to learn more details about the wp issues the plugin solves, check this article:
 
@@ -32,6 +30,9 @@ to learn more details about the wp issues the plugin solves, check this article:
 
 == Empower Your Website with Our Additional Plugins ==
 
+[Woo Paypal Checkout](https://grandplugins.com/product/woo-paypal-checkout/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+
+[Woo Debug Viewer](https://grandplugins.com/product/wp-debug-viewer/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
 
 [Woo Order Splitter](https://grandplugins.com/product/woo-order-splitter/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
 

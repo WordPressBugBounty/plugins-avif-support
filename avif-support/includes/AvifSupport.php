@@ -49,10 +49,10 @@ class AvifSupport extends Base {
 	private function setup() {
 		self::$settings_key     = self::$plugin_info['prefix'] . '-avif-support';
 		self::$default_settings = array(
-			'lib'       => 'imagick',
-			'quality'   => 82,
-			'speed'     => 6,
-			'allow_svg' => false,
+			'lib'     => 'imagick',
+			'quality' => 82,
+			'speed'   => 6,
+			'package' => 'imagick',
 		);
 	}
 
@@ -77,14 +77,6 @@ class AvifSupport extends Base {
 		$settings = get_option( self::$settings_key, self::$default_settings );
 		$settings = array_merge( self::$default_settings, $settings );
 		return ( is_null( $key ) ? $settings : ( isset( $settings[ $key ] ) ? $settings[ $key ] : false ) );
-	}
-
-	/**
-	 * IS SVG Support Enabled.
-	 * @return bool
-	 */
-	public static function is_svg_support_enabled() {
-		return self::get_settings( 'allow_svg' );
 	}
 
 	/**
@@ -166,6 +158,9 @@ class AvifSupport extends Base {
 		global $wp_version;
 		// if it's 6.5^, bail. they already handle it.
 		if ( version_compare( $wp_version, '6.5', '>=' ) ) {
+			if ( $this->is_upload_avif() && $this->is_both_supported() && ( 'gd' === self::get_settings( 'package' ) ) ) {
+				$editors = array_reverse( $editors );
+			}
 			return $editors;
 		}
 
@@ -174,6 +169,10 @@ class AvifSupport extends Base {
 		}
 
 		$supported_gd_editor_class = __NAMESPACE__ . '\AVIFGDEditor';
+
+		if ( $this->is_upload_avif() && $this->is_both_supported() && ( 'gd' === self::get_settings( 'package' ) ) ) {
+			$editors = array_reverse( $editors );
+		}
 
 		// Filter GD editor with our editor.
 		if ( in_array( 'WP_Image_Editor_GD', $editors ) ) {
@@ -447,6 +446,27 @@ class AvifSupport extends Base {
 	 */
 	private function is_gd_and_not_imagick() {
 		return ( self::is_type_supported( 'avif', 'gd' ) && ! self::is_type_supported( 'avif', 'imagick' ) );
+	}
+
+	/**
+	 * Check if both libs are supporting AVIF.
+	 *
+	 * @return boolean
+	 */
+	private function is_both_supported() {
+		return ( self::is_type_supported( 'avif', 'gd' ) && self::is_type_supported( 'avif', 'imagick' ) );
+	}
+
+	/**
+	 * Is uploading AVIF image.
+	 *
+	 * @return boolean
+	 */
+	private function is_upload_avif() {
+		if ( ! empty( $_FILES['async-upload'] ) && ! empty( $_FILES['async-upload']['type'] ) && ( 'image/avif' === $_FILES['async-upload']['type'] ) ) {
+			return true;
+		}
+		return false;
 	}
 
 }

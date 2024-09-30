@@ -60,14 +60,14 @@ class SettingsAJAX extends AJAXBase {
 	 */
 	public function ajax_handle_general_settings() {
 		if ( ! empty( $_POST['nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), self::$plugin_info['prefix'] . '-nonce' ) ) {
-			$quality    = ! empty( $_POST['quality'] ) ? absint( sanitize_text_field( wp_unslash( $_POST['quality'] ) ) ) : 82;
-			$speed      = isset( $_POST['speed'] ) ? absint( sanitize_text_field( wp_unslash( $_POST['speed'] ) ) ) : 6;
-			$svg_status = isset( $_POST['svgSupport'] ) ? true : false;
+			$quality = ! empty( $_POST['quality'] ) ? absint( sanitize_text_field( wp_unslash( $_POST['quality'] ) ) ) : 82;
+			$speed   = isset( $_POST['speed'] ) ? absint( sanitize_text_field( wp_unslash( $_POST['speed'] ) ) ) : 6;
+			$package = ! empty( $_POST['package'] ) ? sanitize_text_field( wp_unslash( $_POST['package'] ) ) : 'imagick';
 			AvifSupport::update_settings(
 				array(
-					'quality'   => $quality,
-					'speed'     => $speed,
-					'allow_svg' => $svg_status,
+					'quality' => $quality,
+					'speed'   => $speed,
+					'package' => $package,
 				)
 			);
 			self::ajax_success_response(

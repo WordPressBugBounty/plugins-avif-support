@@ -1,10 +1,16 @@
 <?php
 namespace GPLSCore\GPLS_PLUGIN_AVFSTW\Utils;
 
+defined( 'ABSPATH' ) || exit;
+
+use GPLSCore\GPLS_PLUGIN_AVFSTW\Utils\Img\ImgUtilsTrait;
+
 /**
  * General Functions Utils Trait.
  */
 trait GeneralUtilsTrait {
+
+	use ImgUtilsTrait;
 
 	/**
 	 * Loader HTML Code.
@@ -176,7 +182,7 @@ trait GeneralUtilsTrait {
 	 * @param string $version
 	 * @return void
 	 */
-	public static function install_and_version_icon( $status = 'green', $version = '' ) {
+	public static function install_and_version_icon( $status = 'green', $version = '', $lib = 'imagick' ) {
 		if ( 'red' === $status ) {
 			?>
 			<div class="req-status text-end">
@@ -196,6 +202,12 @@ trait GeneralUtilsTrait {
 			<div class="req-status text-end">
 				<span class="install-status-icon led-green mx-2 align-middle" style="margin: 0 auto;width: 24px;height: 24px;background-color: #fff476;border-radius: 50%;box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #c0d510 0 -1px 9px, #d0db27 0 2px 12px;display: inline-block;"></span>
 				<span class="align-middle"><?php echo esc_attr( $version ); ?></span>
+				<?php
+				$fail_details = self::test_avif_img_check( $lib );
+				if ( is_string( $fail_details ) ) :
+					?>
+				<span class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-title="<?php echo esc_html( $fail_details ); ?>">?</span>
+				<?php endif; ?>
 			</div>
 			<?php
 		}

@@ -45,7 +45,7 @@ class SettingsPage extends AdminPage {
 	 */
 	protected function prepare() {
 		$this->page_props = array(
-			'menu_title'  => esc_html__( 'AVIF & SVG Support', 'avif-support' ),
+			'menu_title'  => esc_html__( 'AVIF Support', 'avif-support' ),
 			'page_title'  => '',
 			'parent_slug' => 'upload.php',
 			'menu_slug'   => self::$plugin_info['name'] . '-settings',

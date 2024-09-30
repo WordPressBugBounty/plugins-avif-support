@@ -19,11 +19,6 @@ $settings      = AvifSupport::get_settings();
 				<span><?php esc_html_e( 'AVIF image will be uploaded, but sub-sizes will not be generated', 'avif-support' ); ?></span>
 			</div>
 		<?php endif; ?>
-		<?php if ( ! $template_page::is_type_supported( 'svg' ) ) : ?>
-			<div class="notice notice-error avif-reqs py-2 px-3">
-				<span><?php esc_html_e( 'SVG image will be uploaded, but sub-sizes will not be generated', 'avif-support' ); ?></span>
-			</div>
-		<?php endif; ?>
 		<ul class="list-group">
 			<!-- PHP Version -->
 			<li class="list-group-item">
@@ -51,7 +46,7 @@ $settings      = AvifSupport::get_settings();
 							if ( ! $is_gd_enabled ) {
 								$template_page::install_and_version_icon( 'red' );
 							} else {
-								$template_page::install_and_version_icon( $template_page::is_type_supported( 'avif', 'gd' ) ? 'green' : 'red', $template_page->get_gd_version() );
+								$template_page::install_and_version_icon( $template_page::is_type_supported( 'avif', 'gd' ) ? 'green' : 'yellow', $template_page->get_gd_version(), 'gd' );
 							}
 							?>
 						</span>
@@ -69,7 +64,7 @@ $settings      = AvifSupport::get_settings();
 							<?php
 							$is_imagick_enabled = $template_page::is_imagick_enabled( 'avif' );
 							if ( $is_imagick_enabled && $template_page->get_imagick_version() ) {
-								$template_page::install_and_version_icon( $template_page::is_type_supported( 'avif', 'imagick' ) ? 'green' : 'red', $template_page->get_imagick_version() );
+								$template_page::install_and_version_icon( $template_page::is_type_supported( 'avif', 'imagick' ) ? 'green' : 'yellow', $template_page->get_imagick_version(), 'imagick' );
 
 							} else {
 								$template_page::install_and_version_icon( 'red' );
@@ -96,35 +91,11 @@ $settings      = AvifSupport::get_settings();
 				</div>
 			</li>
 		</ul>
-		<ul class="mt-5 list-group">
-			<!-- SVG Support -->
-			<li class="list-group-item">
-				<div class="row">
-					<div class="col-md-6 border-end">
-						<span class="item-key"><?php esc_html_e( 'SVG Support', 'avif-support' ); ?> <span><?php $core->new_keyword( 'New', false ); ?></span></span>
-					</div>
-					<div class="col-md-6 text-end">
-						<span class="item-value">
-							<?php
-							$is_svg_supported = $template_page::is_type_supported( 'svg' );
-							$template_page::install_and_version_icon( $is_svg_supported ? 'green' : 'red', ( ! $is_svg_supported ? 'Not ' : '' ) . 'Supported' );
-							?>
-						</span>
-					</div>
-				</div>
-			</li>
-		</ul>
 	</div>
 
 	<div class="avif-settings bg-white p-5 my-5 position-relative">
 		<?php $template_page::loader_html( $plugin_info['prefix'] ); ?>
 		<h5 class="mb-5 p-3 bg-light"><?php esc_html_e( 'General settings', 'avif-support' ); ?></h5>
-		<!-- Enable SVG Support -->
-		<div class="mb-3">
-			<label for="svg-support-status" class="form-label"><?php esc_html_e( 'Enable SVG upload', 'avif-support' ); ?></label>
-			<input <?php checked( true, $settings['allow_svg'] ); ?> style="margin-left:10px;" type="checkbox" class="form-control enable-svg-support" value="on">
-			<span><?php $core->new_keyword( 'New', false ); ?></span>
-		</div>
 		<!-- Quality -->
 		<div class="mb-3">
 			<label for="default-avif-lib" class="form-label"><?php esc_html_e( 'Default quality', 'avif-support' ); ?></label>
@@ -138,8 +109,17 @@ $settings      = AvifSupport::get_settings();
 			<input type="number" class="form-control avif-speed" value="<?php echo esc_attr( absint( $settings['speed'] ) ); ?>">
 			<small><?php esc_html_e( '( 0: slow - smaller image ) - ( 10: fast - larger image ). default is 6', 'avif-support' ); ?></small>
 		</div>
-
-		
+		<?php if ( $template_page::is_type_supported( 'avif', 'gd' ) && $template_page::is_type_supported( 'avif', 'imagick' ) ) : ?>
+		<!-- Lib Choice -->
+		<div class="mb-3">
+			<label for="package-choose" class="form-label"><?php esc_html_e( 'Package used', 'avif-support' ); ?></label>
+			<select class="form-control avif-package-choose" id="package-choose">
+				<option <?php selected( 'imagick', $settings['package'] ); ?> value="imagick"><?php echo esc_html( 'Imagick' ); ?></option>
+				<option <?php selected( 'gd', $settings['package'] ); ?> value="gd"><?php echo esc_html( 'GD' ); ?></option>
+			</select>
+			<small><?php esc_html_e( 'Choose which package to use to process AVIF images ( Imagick or GD ) Imagick is used by default.', 'avif-support' ); ?></small>
+		</div>
+		<?php endif; ?>
 		<button class=" mt-3 button button-primary <?php echo esc_attr( $plugin_info['prefix'] . '-save-settings' ); ?>"><?php esc_html_e( 'Save', 'avif-support' ); ?></button>
 	</div>
 

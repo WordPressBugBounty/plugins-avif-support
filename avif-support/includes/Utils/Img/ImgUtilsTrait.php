@@ -12,7 +12,7 @@ trait ImgUtilsTrait {
 	 * @return boolean
 	 */
 	public static function is_imagick_enabled( $for_avif = true ) {
-		return ( extension_loaded( 'imagick' ) && class_exists( '\Imagick', false ) && class_exists( '\ImagickPixel', false ) && ( $for_avif ? self::test_avif_img_check( 'imagick' ) : self::test_svg_img_check( 'imagick' ) ) );
+		return ( extension_loaded( 'imagick' ) && class_exists( '\Imagick', false ) && class_exists( '\ImagickPixel', false ) );
 	}
 
 	/**
@@ -21,73 +21,7 @@ trait ImgUtilsTrait {
 	 * @return boolean
 	 */
 	public static function is_gd_enabled( $for_avif = true ) {
-		return ( extension_loaded( 'gd' ) && function_exists( 'gd_info' ) && ( $for_avif ? self::test_avif_img_check( 'gd' ) : self::test_svg_img_check( 'gd' ) ) );
-	}
-
-	/**
-	 * Test AVIF Image check.
-	 *
-	 * @return boolean
-	 */
-	public static function test_avif_img_check( $lib = 'gd' ) {
-		$test_avif_img_path = static::$plugin_info['path'] . 'assets/images/avif-test.avif';
-		if ( 'gd' === $lib ) {
-			return self::test_avif_img_gd( $test_avif_img_path );
-		} elseif ( 'imagick' === $lib ) {
-			return self::test_img_imagick( $test_avif_img_path );
-		}
-		return false;
-	}
-
-	/**
-	 * Test SVG Image check.
-	 *
-	 * @return boolean
-	 */
-	public static function test_svg_img_check( $lib = 'gd' ) {
-		$test_avif_img_path = static::$plugin_info['path'] . 'assets/images/svg-test.svg';
-		if ( 'gd' === $lib ) {
-			return false;
-		} elseif ( 'imagick' === $lib ) {
-			return self::test_img_imagick( $test_avif_img_path );
-		}
-		return false;
-	}
-
-	/**
-	 * Test AVIF Image using GD lib.
-	 *
-	 * @param string $img_path
-	 * @return boolean
-	 */
-	public static function test_avif_img_gd( $img_path ) {
-		if ( ! function_exists( 'imagecreatefromavif' ) ) {
-			return false;
-		}
-		try {
-			return ( false !== imagecreatefromavif( $img_path ) );
-		} catch ( \Exception $e ) {
-			return false;
-		}
-	}
-
-	/**
-	 * Test AVIF Image using Imagick.
-	 *
-	 * @param string $img_path
-	 * @return boolean
-	 */
-	public static function test_img_imagick( $img_path ) {
-		try {
-			$imgick   = new \Imagick();
-			$img_read = $imgick->readImage( $img_path );
-			if ( ! $img_read ) {
-				return false;
-			}
-			return ( true === $imgick->writeImage( $img_path ) );
-		} catch ( \Exception $e ) {
-			return false;
-		}
+		return ( extension_loaded( 'gd' ) && function_exists( 'gd_info' ) );
 	}
 
 	/**
@@ -363,12 +297,18 @@ trait ImgUtilsTrait {
 			$gd_info = gd_info();
 			foreach ( $gd_info as $gd_key => $gd_value ) {
 				if ( str_starts_with( strtolower( $gd_key ), strtolower( $type ) ) && $gd_value ) {
-					return true;
+					$gd_check = true;
+					break;
 				}
 			}
 		}
 
+		if ( $gd_check ) {
+			$gd_check = true === self::test_avif_img_check( 'gd' ) ? true : false;
+		}
+
 		if ( 'gd' === $lib_type ) {
+
 			return $gd_check;
 		}
 
@@ -381,12 +321,71 @@ trait ImgUtilsTrait {
 			}
 		}
 
+		if ( $imagick_check ) {
+			$imagick_check = true === self::test_avif_img_check( 'imagick' ) ? true : false;
+		}
+
 		if ( 'imagick' === $lib_type ) {
 			return $imagick_check;
 		}
 
 		return $gd_check || $imagick_check;
 	}
+
+	/**
+	 * Test AVIF Image check.
+	 *
+	 * @return string|true
+	 */
+	public static function test_avif_img_check( $lib = 'gd' ) {
+		$test_avif_img_path = static::$plugin_info['path'] . 'assets/images/avif-test.avif';
+		if ( 'gd' === $lib ) {
+			return self::test_avif_img_gd( $test_avif_img_path );
+		} elseif ( 'imagick' === $lib ) {
+			return self::test_img_imagick( $test_avif_img_path );
+		}
+		return false;
+	}
+
+	/**
+	 * Test AVIF Image using GD lib.
+	 *
+	 * @param string $img_path
+	 * @return string|true
+	 */
+	public static function test_avif_img_gd( $img_path ) {
+		if ( ! function_exists( 'imagecreatefromavif' ) ) {
+			return esc_html__( 'imagecreatefromavif function doesn\'t exist', 'avif-support' );
+		}
+		if ( ! function_exists( 'imageavif' ) ) {
+			return esc_html__( 'imageavif function doesn\'t exist', 'avif-support' );
+		}
+		try {
+			return ( false !== imagecreatefromavif( $img_path ) );
+		} catch ( \Exception $e ) {
+			return $e->getMessage();
+		}
+	}
+
+	/**
+	 * Test AVIF Image using Imagick.
+	 *
+	 * @param string $img_path
+	 * @return string|true
+	 */
+	public static function test_img_imagick( $img_path ) {
+		try {
+			$imgick   = new \Imagick();
+			$img_read = $imgick->readImage( $img_path );
+			if ( ! $img_read ) {
+				return esc_html__( 'Failed to read test AVIF image', 'avif-support' );
+			}
+			return ( true === $imgick->writeImage( $img_path ) );
+		} catch ( \Exception $e ) {
+			return $e->getMessage();
+		}
+	}
+
 
 	/**
 	 * Get Mimies.
@@ -404,7 +403,6 @@ trait ImgUtilsTrait {
 			'ico'          => 'image/x-icon',
 			'heic'         => 'image/heic',
 			'avif'         => 'image/avif',
-			'svg'          => 'image/svg+xml',
 		);
 	}
 }

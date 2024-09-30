@@ -124,6 +124,18 @@ class Core {
 			),
 		);
 		$this->plugins_list         = array(
+			'woo-lemonsqueezy-checkout'     => array(
+				'title'     => 'Woo Lemonsqueezy Checkout',
+				'desc'      => 'Integrate Lemonsqueezy payment gateway with WooCommerce. Accept payments, manage subscriptions, and streamline your digital product sales effortlessly.',
+				'thumbnail' => 'woo-lemonsqueezy-checkout.webp',
+				'pro_link'  => 'https://grandplugins.com/product/woo-lemonsqueezy-gateway/?utm_source=free&utm_medium=sidebar&utm_content=' . $this->plugin_info['name'],
+			),
+			'woo-paypal-checkout'     => array(
+				'title'     => 'Woo Paypal Checkout',
+				'desc'      => 'integrates PayPal payment options seamlessly into your WooCommerce store. It allows customers to complete purchases directly from checkout, single product page, and shop pages with ease.',
+				'thumbnail' => 'woo-paypal-checkout.webp',
+				'pro_link'  => 'https://grandplugins.com/product/woo-paypal-checkout/?utm_source=free&utm_medium=sidebar&utm_content=' . $this->plugin_info['name'],
+			),
 			'woo-gift-cards'     => array(
 				'title'     => 'Woo Gift Cards',
 				'desc'      => 'Sell gift cards easily on your WooCommerce sites. Create simple, variable gift cards, generate gift cards manually and automatically and send customized gift cards emails to customers.',
