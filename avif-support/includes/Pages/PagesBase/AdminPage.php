@@ -22,16 +22,18 @@ abstract class AdminPage extends Base {
 	 * @var array
 	 */
 	protected $page_props = array(
-		'page_title'     => '',
-		'menu_title'     => '',
-		'menu_slug'      => '',
-		'position'       => 10,
-		'icon_url'       => null,
-		'cap'            => 'manage_options',
-		'template_name'  => '',
-		'is_woocommerce' => false,
-		'tab_key'        => 'tab',
-		'parent_slug'    => null,
+		'page_title'      => '',
+		'menu_title'      => '',
+		'menu_slug'       => '',
+		'position'        => 10,
+		'icon_url'        => null,
+		'cap'             => 'manage_options',
+		'template_name'   => '',
+		'is_woocommerce'  => false,
+		'tab_key'         => 'tab',
+		'parent_slug'     => null,
+		'allow_multisite' => false,
+		'multisite_only'  => false,
 	);
 
 	/**
@@ -134,6 +136,13 @@ abstract class AdminPage extends Base {
 	protected $templates_folder;
 
 	/**
+	 * Other Pages.
+	 * 
+	 * @var array
+	 */
+	protected $other_pages;
+
+	/**
 	 * Default Page Properties.
 	 *
 	 * @var array
@@ -169,6 +178,17 @@ abstract class AdminPage extends Base {
 	 * Admin Page Constructor.
 	 */
 	protected function __construct() {
+		if ( is_admin() ) {
+			add_action( 'init', array( $this, 'start_setup' ), 1000 );
+		}
+	}
+
+	/**
+	 * Start Setup.
+	 *
+	 * @return void
+	 */
+	public function start_setup() {
 		$this->main_setup();
 		$this->main_hooks();
 	}
@@ -190,7 +210,7 @@ abstract class AdminPage extends Base {
 			$this->page_path = admin_url( ( $this->page_props['parent_slug'] ? $this->page_props['parent_slug'] : 'admin.php' ) . '?page=' . $this->page_props['menu_slug'] );
 		}
 
-		// Main Assets
+		// Main Assets.
 		$this->core_assets = array(
 			array(
 				'type'   => 'js',
@@ -212,6 +232,12 @@ abstract class AdminPage extends Base {
 			),
 		);
 
+		if ( empty( $this->tabs ) ) {
+			$this->tabs['general'] = array(
+				'default'  => true,
+				'template' => ! empty( $this->page_props['template_name'] ) ? $this->page_props['template_name'] : '',
+			);
+		}
 	}
 
 	/**
