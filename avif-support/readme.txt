@@ -1,10 +1,10 @@
 === AVIF Uploader ===
 Tags: avif, image, wordpress avif, image optimization, avif subsizes
-Tested up to: 6.7
+Tested up to: 7.0
 Requires at least: 5.3.0
 Requires PHP: 7.0.0
-Stable Tag: 1.1.2
-Version: 1.1.2
+Stable Tag: 1.1.3
+Version: 1.1.3
 Contributors: grandplugins
 Author: GrandPlugins
 Author URI: https://grandplugins.com

@@ -8,7 +8,7 @@ namespace GPLSCore\GPLS_PLUGIN_AVFSTW;
  * Author URI:        https://grandplugins.com
  * Text Domain:       avif-support
  * Std Name:          gpls-avfstw-avif-support
- * Version:           1.1.2
+ * Version:           1.1.3
  * Requires at least: 5.3.0
  * Requires PHP:      7.0.0
  */
