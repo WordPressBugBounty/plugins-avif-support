@@ -1,10 +1,10 @@
-=== AVIF Uploader ===
+=== AVIF Uploader – Upload, Display and Fix AVIF Images ===
 Tags: avif, image, wordpress avif, image optimization, avif subsizes
-Tested up to: 7.0
+Tested up to: 7.1
 Requires at least: 5.3.0
 Requires PHP: 7.0.0
-Stable Tag: 1.1.3
-Version: 1.1.3
+Stable Tag: 1.1.4
+Version: 1.1.4
 Contributors: grandplugins
 Author: GrandPlugins
 Author URI: https://grandplugins.com
@@ -12,96 +12,68 @@ Author email: services@grandplugins.com
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
+Upload AVIF images, display them correctly, and generate the sub-sizes WordPress leaves out.
+
 
 == Description ==
-AVIF support plugin aims to support avif images in WordPress by overcome wp issues and limits regarding uploading, displaying and generating avif and SVG images.
+
+WordPress has handled AVIF since 6.5, but plenty of sites still cannot upload one at all, or upload it and then find the thumbnails never generate and the image reports the wrong dimensions. This plugin fixes that.
+
+It first tells you whether your server can process AVIF, then repairs the places WordPress gives up: the upload filter, the width and height metadata, sub-size generation, and the downscaled copy of large images.
+
+It does not convert or compress anything. Turning an existing library of JPEGs into AVIF is a different job - see WP Image Converter below.
+
+**Before you install:** AVIF handling depends on your server. If neither GD nor Imagick on your host is built with AVIF support, no plugin can add it. The Status screen tells you exactly where you stand, so check that first.
 
 == Features ==
 
-* Check Your server status for AVIF Support.
-* Allow AVIF images upload.
-* Fix WP width and height failure.
-* Fix AVIF sub-sizes generation.
-* Fix AVIF downscale image generation.
+* Check whether your server can actually handle AVIF, before anything else.
+* Allow AVIF images to be uploaded.
+* Fix the wrong width and height WordPress records for AVIF files.
+* Fix AVIF sub-size (thumbnail) generation.
+* Fix the downscaled copy WordPress makes of large AVIF images.
+* Choose which image library and quality setting to use.
 
-to learn more details about the wp issues the plugin solves, check this article:
+For the detail on the WordPress issues this works around:
 
 [How to upload AVIF images in WordPress](https://grandplugins.com/how-to-upload-avif-images-in-wordpress/?utm_source=wp)
 
-== Empower Your Website with Our Additional Plugins ==
+== More Plugins for Working With Media ==
 
-[Woo Paypal Checkout](https://grandplugins.com/product/woo-paypal-checkout/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+If you are handling images at any volume, these are the ones our AVIF users reach for most.
 
-[Woo Debug Viewer](https://grandplugins.com/product/wp-debug-viewer/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+[WP Watermark Images](https://grandplugins.com/product/wp-images-watermark/?utm_source=free&utm_medium=readme&utm_content=avif-support&utm_term=wp-images-watermark) &mdash; watermark images in bulk, on upload, or per WooCommerce order.
 
-[Woo Order Splitter](https://grandplugins.com/product/woo-order-splitter/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+[WP Image Converter & Optimizer](https://grandplugins.com/product/wp-image-converter/?utm_source=free&utm_medium=readme&utm_content=avif-support&utm_term=wp-image-converter) &mdash; convert a whole library between png, jpg, gif, webp and avif. No quota, no third-party service.
 
-[WP DB Controller](https://grandplugins.com/product/wp-db-controller/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+[WP PDF Password Protect](https://grandplugins.com/product/pdf-password-protect/?utm_source=free&utm_medium=readme&utm_content=avif-support&utm_term=pdf-password-protect) &mdash; password-protect the PDFs in your media library.
 
-[Woo Conditional Gateways](https://grandplugins.com/product/woo-conditional-gateways/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+[WP Watermark PDF](https://grandplugins.com/product/wp-watermark-pdf/?utm_source=free&utm_medium=readme&utm_content=avif-support&utm_term=wp-watermark-pdf) &mdash; stamp PDFs the same way you stamp images.
 
-[Woo User Orders Limit](https://grandplugins.com/product/woo-user-orders-limit/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+[Image Sizes Controller](https://grandplugins.com/product/image-sizes-controller/?utm_source=free&utm_medium=readme&utm_content=avif-support&utm_term=image-sizes-controller) &mdash; see every image size your theme and plugins register, and switch off the ones you never use.
 
-[Woo Lemonsqueezy Gateway](https://grandplugins.com/product/woo-lemonsqueezy-gateway/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+[WP GIF Editor](https://grandplugins.com/product/wp-gif-editor/?utm_source=free&utm_medium=readme&utm_content=avif-support&utm_term=wp-gif-editor) &mdash; resize, crop and optimise animated GIFs inside WordPress.
 
-[Woo Email Tracker](https://grandplugins.com/product/woo-email-tracker/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+[WP Large Images Uploader](https://grandplugins.com/product/wp-large-images-uploader/?utm_source=free&utm_medium=readme&utm_content=avif-support&utm_term=wp-large-images-uploader) &mdash; upload very large images without hitting server limits.
 
-[Woo Email Recipients](https://grandplugins.com/product/woo-order-email-recipients/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+[WP Image Magnifier and Lightbox](https://grandplugins.com/product/wp-image-zoom-on-hover/?utm_source=free&utm_medium=readme&utm_content=avif-support&utm_term=wp-image-zoom-on-hover) &mdash; zoom on hover and a lightbox, without a page builder.
 
-[Woo instock notifier](https://grandplugins.com/product/woo-instock-notifier/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+== If You Run WooCommerce ==
 
-[Woo Gift Cards](https://grandplugins.com/product/woo-gift-cards/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+[Coming Soon Products](https://grandplugins.com/product/woo-coming-soon-products/?utm_source=free&utm_medium=readme&utm_content=avif-support&utm_term=woo-coming-soon-products) &mdash; hide or tease WooCommerce products before they launch.
 
-[Woo Restrict Orders](https://grandplugins.com/product/woo-restrict-orders/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+[Quick View and Buy Now](https://grandplugins.com/product/quick-view-and-buy-now-for-woocommerce/?utm_source=free&utm_medium=readme&utm_content=avif-support&utm_term=quick-view-and-buy-now-for-woocommerce) &mdash; a product preview and a one-click buy button.
 
-[Woo Bulk Price & Stock Manager](https://grandplugins.com/product/woo-bulk-price-change/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+[Paddle Checkout](https://grandplugins.com/product/woo-paddle-checkout/?utm_source=free&utm_medium=readme&utm_content=avif-support&utm_term=woo-paddle-checkout) &mdash; take payments through Paddle, with subscriptions.
 
-[Woo Variation Sold individually](https://grandplugins.com/product/woo-variation-sold-individually/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+[Browse everything](https://grandplugins.com/product-category/plugin/?utm_source=free&utm_medium=readme&utm_content=avif-support&utm_term=browse_all)
 
-[Woo Paddle Checkout](https://grandplugins.com/product/woo-paddle-checkout/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
+== Changelog ==
 
-[Woo Sales notifications](https://grandplugins.com/product/woo-sales-notification/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
-
-[Woo Real time Cart Tracker](https://grandplugins.com/product/woo-cart-tracker/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
-
-[Woo Best Sellers](https://grandplugins.com/product/woo-best-seller/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
-
-[Advanced Captcha](https://grandplugins.com/product/woo-advanced-captcha/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
-
-[WooCommerce Advanced Bundles](https://grandplugins.com/product/woo-advanced-add-to-cart/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
-
-[WooCommerce Advanced Pricing - Discounts & Quantity Swatches](https://grandplugins.com/product/woo-advanced-pricing/?utm_source=free&utm_medium=gpls-avfstw-avif-support)
-
-[Image Sizes Controller](https://wordpress.org/plugins/image-sizes-controller/)
-
-[WooCommerce Cart Limiter](https://wordpress.org/plugins/cart-limiter/)
-
-[WP Watermark Images](https://wordpress.org/plugins/watermark-images-for-wp-and-woo-grandpluginswp/)
-
-[Coming Soon Products for WooCommerce](https://wordpress.org/plugins/coming-soon-products-for-woocommerce)
-
-[WooCommerce Cart and Order Limiter](https://wordpress.org/plugins/cart-limiter/)
-
-[Simple Countdown](https://wordpress.org/plugins/simple-countdown/)
-
-[Watermark PDF](https://wordpress.org/plugins/watermark-pdf/)
-
-[Quick View and Buy Now for WooCommerce](https://wordpress.org/plugins/quick-view-and-buy-now-for-woocommerce/)
-
-[WooCommerce Maintenance Mode](https://wordpress.org/plugins/ultimate-maintenance-mode-for-woocommerce/)
-
-[Sidebars Gutenberg Blocks](https://wordpress.org/plugins/sidebars-blocks/)
-
-[Large Images Uploader](https://wordpress.org/plugins/large-images-uploader/)
-
-[Maintenance Mode for WooCommerce](https://wordpress.org/plugins/ultimate-maintenance-mode-for-woocommerce/)
-
-[Single Ajax Add to Cart For WooCommerce](https://wordpress.org/plugins/ajax-single-add-to-cart-for-woocommerce/)
-
-[GIF Uploader](https://wordpress.org/plugins/gif-uploader-wp-grandplugins)
-
-[PDF Password Protect](https://wordpress.org/plugins/pdf-password-protect/)
-
-[Paypal Subscriptions](https://wordpress.org/plugins/gpls-paypal-subscriptions/)
-
-[WP Plugin Creator](https://wpplugincreator.com)
+= 1.1.4 =
+* Added: a note on the Media screens showing how many images in your library are not yet AVIF, with a way to convert them in bulk.
+* Added: a note showing how many image sizes your theme and plugins register, and how many files that produces.
+* Both read your own site, are dismissible, and stay quiet for a month after you dismiss one.
+* Changed: plugin renamed to AVIF Uploader, matching its name on WordPress.org.
+* Changed: rewrote the description and recommended plugins; removed a mention of SVG support that was never active.
+* Tested up to WordPress 7.1.

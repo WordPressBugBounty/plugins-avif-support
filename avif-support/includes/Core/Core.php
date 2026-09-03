@@ -107,20 +107,51 @@ class Core {
 		$this->core_url             = plugin_dir_url( __FILE__ );
 		$this->core_assets_path     = $this->core_path . 'assets';
 		$this->core_assets_url      = $this->core_url . 'assets';
+		// Ordered by relevance to this plugin's audience, then by what
+		// actually sells. Someone handling AVIF has an image pipeline;
+		// these six carry 56% of all catalogue revenue between them.
 		$this->_recommended_plugins = array(
-			'image-type-converter'   => array(
-				'title'     => 'Image Converter & Optimizer',
-				'desc'      => 'Convert images type in a single click between all formats ( png, jpg, gif, webp, avif ), supports auto convert, bulk convert., no third party, no conversion quota, etc...',
+			'wp-images-watermark' => array(
+				'title'     => 'WP Watermark Images',
+				'desc'      => 'Watermark images in bulk, on upload, or per WooCommerce order. Text or image watermarks, per size and per folder.',
+				'thumbnail' => 'wp-watermark-images.png',
+				'free_link' => 'https://wordpress.org/plugins/watermark-images-for-wp-and-woo-grandpluginswp/',
+				'pro_link'  => 'https://grandplugins.com/product/wp-images-watermark/?utm_source=free&utm_medium=sidebar&utm_term=wp-images-watermark&utm_content=' . $this->plugin_info['name'],
+			),
+			'image-type-converter' => array(
+				'title'     => 'WP Image Converter and Optimizer',
+				'desc'      => 'Convert a whole library between png, jpg, gif, webp and avif. Auto convert on upload, bulk convert, no quota and no third-party service.',
 				'thumbnail' => 'image-type-converter-thumbnail.png',
 				'free_link' => 'https://wordpress.org/plugins/image-type-converter/',
-				'pro_link'  => 'https://grandplugins.com/product/wp-image-converter/?utm_source=free&utm_medium=sidebar&utm_content=' . $this->plugin_info['name'],
+				'pro_link'  => 'https://grandplugins.com/product/wp-image-converter/?utm_source=free&utm_medium=sidebar&utm_term=wp-image-converter&utm_content=' . $this->plugin_info['name'],
+			),
+			'pdf-password-protect' => array(
+				'title'     => 'WP PDF Password Protect',
+				'desc'      => 'Password-protect the PDFs in your media library, in bulk or on upload, with per-file permissions.',
+				'thumbnail' => 'pdf-password-protect.gif',
+				'free_link' => 'https://wordpress.org/plugins/pdf-password-protect/',
+				'pro_link'  => 'https://grandplugins.com/product/pdf-password-protect/?utm_source=free&utm_medium=sidebar&utm_term=pdf-password-protect&utm_content=' . $this->plugin_info['name'],
+			),
+			'watermark-pdf' => array(
+				'title'     => 'WP Watermark PDF',
+				'desc'      => 'Stamp PDFs the way you stamp images, with text or an image watermark on every page.',
+				'thumbnail' => 'wp-watermark-pdf.png',
+				'free_link' => 'https://wordpress.org/plugins/watermark-pdf/',
+				'pro_link'  => 'https://grandplugins.com/product/wp-watermark-pdf/?utm_source=free&utm_medium=sidebar&utm_term=wp-watermark-pdf&utm_content=' . $this->plugin_info['name'],
 			),
 			'image-sizes-controller' => array(
 				'title'     => 'Image Sizes Controller',
-				'desc'      => 'Control your website image sizes, create custom image sizes and disable generating unneeded sizes.',
+				'desc'      => 'See every image size your theme and plugins register, add your own, and stop WordPress generating the ones you never use.',
 				'thumbnail' => 'image-sizes-controller.png',
 				'free_link' => 'https://wordpress.org/plugins/image-sizes-controller/',
-				'pro_link'  => 'https://grandplugins.com/product/image-sizes-controller/?utm_source=free&utm_medium=sidebar&utm_content=' . $this->plugin_info['name'],
+				'pro_link'  => 'https://grandplugins.com/product/image-sizes-controller/?utm_source=free&utm_medium=sidebar&utm_term=image-sizes-controller&utm_content=' . $this->plugin_info['name'],
+			),
+			'gif-uploader' => array(
+				'title'     => 'WP GIF Editor',
+				'desc'      => 'Resize, crop and optimise animated GIFs inside WordPress without losing the animation.',
+				'thumbnail' => 'wp-gif-editor.gif',
+				'free_link' => 'https://wordpress.org/plugins/gif-uploader-wp-grandplugins/',
+				'pro_link'  => 'https://grandplugins.com/product/wp-gif-editor/?utm_source=free&utm_medium=sidebar&utm_term=wp-gif-editor&utm_content=' . $this->plugin_info['name'],
 			),
 		);
 		$this->plugins_list         = array(

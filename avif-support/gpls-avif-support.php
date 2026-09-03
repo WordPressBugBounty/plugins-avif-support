@@ -2,13 +2,13 @@
 namespace GPLSCore\GPLS_PLUGIN_AVFSTW;
 
 /**
- * Plugin Name:       AVIF Support [GrandPlugins]
- * Description:       AVIF support plugin aims to support avif images in WordPress by overcome wp issues and limits regarding uploading, displaying and generating avif images.
+ * Plugin Name:       AVIF Uploader [GrandPlugins]
+ * Description:       Upload AVIF images, display them correctly, and generate the sub-sizes WordPress leaves out.
  * Author:            GrandPlugins
  * Author URI:        https://grandplugins.com
  * Text Domain:       avif-support
  * Std Name:          gpls-avfstw-avif-support
- * Version:           1.1.3
+ * Version:           1.1.4
  * Requires at least: 5.3.0
  * Requires PHP:      7.0.0
  */
@@ -172,6 +172,7 @@ if ( ! class_exists( __NAMESPACE__ . '\GPLS_AVFSTW_Class' ) ) :
 		 */
 		public static function includes() {
 			require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . 'vendor/autoload.php';
+			require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . 'includes/Funnel.php';
 		}
 
 		/**
